@@ -1,6 +1,2 @@
-require "knitting_patterns/version"
-
-module KnittingPatterns
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./knitting_patterns/version"
+require_relative './knitting_patterns/cli'

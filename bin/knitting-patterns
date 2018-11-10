@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require './lib/knitting_patterns'
+KnittingPatterns::CLI.new.call
