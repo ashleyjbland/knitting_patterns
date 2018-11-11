@@ -13,6 +13,7 @@ class KnittingPatterns::CLI
     2. Frost Branches by Sweet Birch Designs
     3. Sirius by Camilla Vad
     DOC
+    @patterns = KnittingPatterns::Pattern.hot_right_now
   end
 
   def menu
