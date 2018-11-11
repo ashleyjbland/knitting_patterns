@@ -8,12 +8,10 @@ class KnittingPatterns::CLI
 
   def list_patterns
     puts "Hello fellow knitter, here are the 'hot right now' Ravelry patterns:"
-    puts <<-DOC
-    1. Owlen Cardigan by Cheryl Toy
-    2. Frost Branches by Sweet Birch Designs
-    3. Sirius by Camilla Vad
-    DOC
     @patterns = KnittingPatterns::Pattern.hot_right_now
+    @patterns.each.with_index(1) do |pattern, index|
+      puts "#{index}. #{pattern.title} by #{pattern.author}"
+    end
   end
 
   def menu
@@ -21,16 +19,12 @@ class KnittingPatterns::CLI
     while input != "exit"
       puts "Enter the number of the pattern you'd like more details on or 'list' to see them all again or 'exit' to leave."
       input = gets.strip.downcase
-      case input
-      when "1"
-        puts "Here are the details for first pattern:"
-      when "2"
-        puts "Here are the details for second pattern:"
-      when "3"
-        puts "Here are the details for third pattern:"
-      when "list"
+
+      if input.to_i > 0
+        puts @patterns[input.to_i-1]
+      elsif input == "list"
         list_patterns
-      when "exit"
+      elsif input == "exit"
         goodbye
       else
         print "Hmm, I'm not familiar with that pattern. "
