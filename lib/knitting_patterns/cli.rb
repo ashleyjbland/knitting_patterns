@@ -21,7 +21,8 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        puts @patterns[input.to_i-1]
+        the_pattern = @patterns[input.to_i-1]
+        puts "#{the_pattern.title} by #{the_pattern.author}"
       elsif input == "list"
         list_patterns
       elsif input == "exit"
