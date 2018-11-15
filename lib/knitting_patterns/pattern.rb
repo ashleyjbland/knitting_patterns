@@ -11,4 +11,5 @@ class KnittingPatterns::Pattern
 
 
     patterns
+  end
 end
