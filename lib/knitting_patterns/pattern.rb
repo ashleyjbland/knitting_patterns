@@ -14,6 +14,12 @@ class KnittingPatterns::Pattern
   end
 
   def self.scrape_ravelry
-    doc = Nokogiri::HTML(open(https://www.ravelry.com/patterns/search#view=captioned_thumbs&craft=knitting&sort=recently-popular))
+    doc = Nokogiri::HTML(open("https://www.ravelry.com/patterns/search#view=captioned_thumbs&sort=recently-popular&craft=knitting"))
+
+    pattern = self.new
+    #pattern.title = doc.search("")
+    #deal.price = doc.search("#todays-deal span.price").text.strip
+    pattern.author = doc.search("#page")
+    binding.pry
   end
 end
