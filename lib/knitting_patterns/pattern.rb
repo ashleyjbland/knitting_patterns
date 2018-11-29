@@ -1,7 +1,7 @@
 class KnittingPatterns::Pattern
   attr_accessor :title, :author
 
-  def self.hot_right_now
+  def self.knit_patterns
     #scrape ravelry
     self.scrape_patterns
   end
@@ -13,7 +13,7 @@ class KnittingPatterns::Pattern
     patterns
   end
 
-  def self.scrape_ravelry
+  def self.scrape_purlsoho
     #doc = Nokogiri::HTML(open("https://www.ravelry.com/patterns/search#view=captioned_thumbs&sort=recently-popular&craft=knitting"))
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-view-all/"))
     pattern = self.new

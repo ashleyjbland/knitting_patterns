@@ -7,10 +7,10 @@ class KnittingPatterns::CLI
   end
 
   def list_patterns
-    puts "Hello fellow knitter, here are the 'hot right now' Ravelry patterns:"
-    @patterns = KnittingPatterns::Pattern.hot_right_now
+    puts "Hello fellow knitter, here are the free knitting patterns from Purl Soho"
+    @patterns = KnittingPatterns::Pattern.knit_patterns
     @patterns.each.with_index(1) do |pattern, index|
-      puts "#{index}. #{pattern.title} by #{pattern.author}"
+      puts "#{index}. #{pattern.title}"
     end
   end
 
