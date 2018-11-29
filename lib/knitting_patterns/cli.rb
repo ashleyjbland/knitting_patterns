@@ -7,11 +7,13 @@ class KnittingPatterns::CLI
   end
 
   def list_patterns
-    puts "Hello fellow knitter, here are the free knitting patterns from Purl Soho"
-    @patterns = KnittingPatterns::Pattern.knit_patterns
-    @patterns.each.with_index(1) do |pattern, index|
-      puts "#{index}. #{pattern.title}"
-    end
+    puts "Hello fellow knitter!"
+    puts "Here are the free knitting patterns from Purl Soho:"
+    #@patterns =
+    KnittingPatterns::Pattern.knit_patterns
+    #@patterns.each.with_index(1) do |pattern, index|
+      #puts "#{index}. #{pattern.title}"
+    #end
   end
 
   def menu
@@ -34,7 +36,7 @@ class KnittingPatterns::CLI
   end
 
   def goodbye
-    puts "Thanks for stopping by! Come back anytime to review more knit sh!t!"
+    puts "Thanks for stopping by! Come back anytime to review more knitting patterns!"
   end
 
 end
