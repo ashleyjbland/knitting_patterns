@@ -9,10 +9,10 @@ class KnittingPatterns::CLI
   def list_patterns
     puts "Hello fellow knitter!"
     puts "Here are the free knitting patterns from Purl Soho:"
-    #@patterns =
-    KnittingPatterns::Pattern.knit_patterns
-    #@patterns.each.with_index(1) do |pattern, index|
-      #puts "#{index}. #{pattern.title}"
+    @patterns = KnittingPatterns::Pattern.knit_patterns
+    #@urls = KnittingPatterns::Pattern.selected_pattern
+    #@url.each.with_index(1) do |url, index|
+      #puts "#{index}. #{url}"
     #end
   end
 
@@ -23,8 +23,8 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        the_pattern = @patterns[input.to_i-1]
-        puts "#{the_pattern.title} by #{the_pattern.author}"
+        #the_url = @urls[input.to_i-1]
+        #puts "#{the_url}"
       elsif input == "list"
         list_patterns
       elsif input == "exit"

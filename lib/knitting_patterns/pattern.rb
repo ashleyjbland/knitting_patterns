@@ -1,5 +1,5 @@
 class KnittingPatterns::Pattern
-  attr_accessor :title, :author
+  attr_accessor :title, :url
 
   def self.knit_patterns
     #scrape ravelry
@@ -18,10 +18,26 @@ class KnittingPatterns::Pattern
     #doc = Nokogiri::HTML(open("https://www.ravelry.com/patterns/search#view=captioned_thumbs&sort=recently-popular&craft=knitting"))
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-view-all/"))
     pattern = self.new
-    pattern.title = doc.css("li").css("h3").each.with_index(1) {|title, index| puts puts "#{index}. #{title.text}"}
+    pattern.title = doc.css("li").css("h3").each.with_index(1) {|title, index| puts "#{index}. #{title.text}"}
+    #pattern.title = doc.css("li").css("h3").each {|title| puts title.text}
+    #pattern.url = doc.css("li").css("h3").css("a").attr("href").each {|url| puts url}
 
 
     pattern
     #binding.pry
+  end
+
+  def self.selected_pattern
+    urls = []
+
+    urls << self.scrape_selected_pattern
+
+    urls
+  end
+
+  def self.scrape_selected_pattern
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-view-all/"))
+    pattern = self.new
+    pattern.url = doc.css("li").css("h3").css("a").attr("href").each {|url| puts url}
   end
 end
