@@ -10,6 +10,7 @@ class KnittingPatterns::Pattern
     patterns = []
 
     patterns << self.scrape_purlsoho
+    patterns << self.scrape_selected_pattern
 
     patterns
   end
@@ -22,22 +23,16 @@ class KnittingPatterns::Pattern
     #pattern.title = doc.css("li").css("h3").each {|title| puts title.text}
     #pattern.url = doc.css("li").css("h3").css("a").attr("href").each {|url| puts url}
 
-
     pattern
     #binding.pry
-  end
-
-  def self.selected_pattern
-    urls = []
-
-    urls << self.scrape_selected_pattern
-
-    urls
   end
 
   def self.scrape_selected_pattern
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-view-all/"))
     pattern = self.new
     pattern.url = doc.css("li").css("h3").css("a").attr("href").each {|url| puts url}
+
+    pattern
+    binding.pry
   end
 end
