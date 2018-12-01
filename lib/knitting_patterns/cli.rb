@@ -9,7 +9,8 @@ class KnittingPatterns::CLI
   def list_patterns
     puts "Hello fellow knitter!"
     puts "Here are the categories of the free knitting patterns from Purl Soho:"
-    @patterns = KnittingPatterns::Pattern.knit_patterns
+    @categories = KnittingPatterns::Pattern.scrape_knit_categories
+    @categories.each.with_index(1) {|category, index| puts "#{index}. #{category}"}
     #@urls = KnittingPatterns::Pattern.selected_pattern
     #@url.each.with_index(1) do |url, index|
       #puts "#{index}. #{url}"
