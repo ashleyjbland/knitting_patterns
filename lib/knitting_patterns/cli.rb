@@ -8,7 +8,7 @@ class KnittingPatterns::CLI
 
   def list_patterns
     puts "Hello fellow knitter!"
-    puts "Here are the free knitting patterns from Purl Soho:"
+    puts "Here are the categories of the free knitting patterns from Purl Soho:"
     @patterns = KnittingPatterns::Pattern.knit_patterns
     #@urls = KnittingPatterns::Pattern.selected_pattern
     #@url.each.with_index(1) do |url, index|
@@ -19,7 +19,8 @@ class KnittingPatterns::CLI
   def menu
     input = nil
     while input != "exit"
-      puts "Enter the number of the pattern you'd like more details on or 'list' to see them all again or 'exit' to leave."
+      puts "To see all the patterns in a category, enter the number of the category. Type 'list' to see them all again or 'exit' to leave."
+      #puts "Enter the number of the pattern you'd like more details on or 'list' to see them all again or 'exit' to leave."
       input = gets.strip.downcase
 
       if input.to_i > 0
