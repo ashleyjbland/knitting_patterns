@@ -13,6 +13,22 @@ class KnittingPatterns::CLI
     @categories.each.with_index(1) {|category, index| puts "#{index}. #{category}"}
   end
 
+  def list_category_patterns
+    @patterns = scrape_patterns
+    @patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
+  end
+
+  def scrape_patterns #should be a class method is pattern.rb
+    patterns = [] << scrape_category_patterns
+    patterns
+  end
+
+  def scrape_category_patterns #should be a class method is pattern.rb
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{@input}/"))
+    title = doc.css("li").css("h3").text
+    title
+  end
+
   def menu
     input = nil
     while input != "exit"
@@ -21,7 +37,8 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        puts "#{@categories[input.to_i-1]}"
+        @input = @categories[input.to_i-1]
+        list_category_patterns
       elsif input == "list"
         puts "Interested in some more ideas, huh?"
         list_categories
