@@ -26,12 +26,21 @@ class KnittingPatterns::CLI
   def scrape_category_patterns #should be a class method is pattern.rb
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{@input}/"))
     title = doc.css("li").css("h3").css("a").text.split(/[a-z][A-Z]/) #this is deleting these characters but I want to include them
+    #@urls = doc.css("li").css("h3").css("a").attr("href") #definitely in the wrong spot, wrong method, wrong class
+    #@urls.each {|url| puts "#{url}"}
     title
   end
 
-  def choosing_a_pattern
+  def choosing_a_pattern #this might be an ugly method
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
     input = gets.strip.downcase
+    if input.to_i > 0
+      #open https://www.purlsoho.com/create/2018/10/12/muhuroosa-blanket/
+       #this doesn't work
+    else
+      puts "Hmm, I don't see that pattern. Here is the list of categories again:"
+      list_categories
+    end
   end
 
   def menu
