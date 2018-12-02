@@ -14,19 +14,24 @@ class KnittingPatterns::CLI
   end
 
   def list_category_patterns
+    puts "Here are the patterns in the #{@input} category:"
     @patterns = scrape_patterns
     @patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
-  def scrape_patterns #should be a class method is pattern.rb
-    patterns = [] << scrape_category_patterns
-    patterns
+  def scrape_patterns #should be a class method is pattern.rb, do I need to include this at all??
+    scrape_category_patterns
   end
 
   def scrape_category_patterns #should be a class method is pattern.rb
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{@input}/"))
-    title = doc.css("li").css("h3").text
+    title = doc.css("li").css("h3").css("a").text.split(/[a-z][A-Z]/) #this is deleting these characters but I want to include them
     title
+  end
+
+  def choosing_a_pattern
+    puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
+    input = gets.strip.downcase
   end
 
   def menu
@@ -39,6 +44,7 @@ class KnittingPatterns::CLI
       if input.to_i > 0
         @input = @categories[input.to_i-1]
         list_category_patterns
+        choosing_a_pattern
       elsif input == "list"
         puts "Interested in some more ideas, huh?"
         list_categories

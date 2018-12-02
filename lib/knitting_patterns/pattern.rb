@@ -15,8 +15,9 @@ class KnittingPatterns::Pattern
     category
   end
 
-
-
-
-
+  def self.scrape_category_patterns
+    doc = doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-blankets/"))
+    title = doc.css("li").css("h3").css("a").text
+    binding.pry
+  end
 end
