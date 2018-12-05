@@ -19,24 +19,16 @@ class KnittingPatterns::CLI
     @patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
-  def scrape_patterns #should be a class method is pattern.rb, do I need to include this at all??
-    scrape_category_patterns
-  end
-
-  def scrape_category_patterns #should be a class method is pattern.rb
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{@input}/"))
-    title = doc.css("li").css("h3").css("a").text.split(/[a-z][A-Z]/) #this is deleting these characters but I want to include them
-    #@urls = doc.css("li").css("h3").css("a").attr("href") #definitely in the wrong spot, wrong method, wrong class
-    #@urls.each {|url| puts "#{url}"}
-    title
-  end
+  
 
   def choosing_a_pattern #this might be an ugly method
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
     input = gets.strip.downcase
     if input.to_i > 0
+      #use doc, line 27; give object url attribute
       #open https://www.purlsoho.com/create/2018/10/12/muhuroosa-blanket/
        #this doesn't work
+       #url = pattern_name.attributes["href"].value
     else
       puts "Hmm, I don't see that pattern. Here is the list of categories again:"
       list_categories
