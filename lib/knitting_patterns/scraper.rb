@@ -4,8 +4,8 @@ class KnittingPatterns::Scraper #back end or controller class
     scrape_category_patterns
   end
 
-  def scrape_category_patterns #should be a class method in pattern.rb
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{@input}/"))
+  def scrape_category_patterns(user_input) #should be a class method in pattern.rb
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
     binding.pry
     doc.css("li").css("h3").css("a").each do |pattern_name|
       pattern = Pattern.new
@@ -27,10 +27,10 @@ class KnittingPatterns::Scraper #back end or controller class
     category
   end
 
-  def self.scrape_category_patterns
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-blankets/"))
-    title = doc.css("li").css("h3").css("a").text
-    url = doc.css("li").css("h3").css("a").attr("href").strip
-    binding.pry
-  end
+  #def self.scrape_category_patterns
+  #  doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-blankets/"))
+  #  title = doc.css("li").css("h3").css("a").text
+  #  url = doc.css("li").css("h3").css("a").attr("href").strip
+  #  binding.pry
+  #end
 end

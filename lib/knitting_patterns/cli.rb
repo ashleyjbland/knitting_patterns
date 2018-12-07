@@ -15,19 +15,17 @@ class KnittingPatterns::CLI
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    @patterns = scrape_patterns
-    @patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
+    patterns = KnittingPatterns::Scraper.scrape_category_patterns(@input)
+    #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
-  
+
 
   def choosing_a_pattern #this might be an ugly method
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
     input = gets.strip.downcase
     if input.to_i > 0
       #use doc, line 27; give object url attribute
-      #open https://www.purlsoho.com/create/2018/10/12/muhuroosa-blanket/
-       #this doesn't work
        #url = pattern_name.attributes["href"].value
     else
       puts "Hmm, I don't see that pattern. Here is the list of categories again:"
