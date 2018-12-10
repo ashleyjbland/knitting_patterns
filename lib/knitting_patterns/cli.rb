@@ -15,7 +15,7 @@ class KnittingPatterns::CLI
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    patterns = KnittingPatterns::Scraper.scrape_category_patterns(@input)
+    patterns = KnittingPatterns::Pattern.category_patterns(@input)
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
@@ -25,8 +25,7 @@ class KnittingPatterns::CLI
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
     input = gets.strip.downcase
     if input.to_i > 0
-      #use doc, line 27; give object url attribute
-       #url = pattern_name.attributes["href"].value
+      KnittingPatterns::Scraper.scrape_pattern_url
     else
       puts "Hmm, I don't see that pattern. Here is the list of categories again:"
       list_categories
