@@ -10,18 +10,19 @@ class KnittingPatterns::Scraper #back end or controller class
     category
   end
 
-  def self.scrape_category_patterns(user_input)
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
-    pattern_name = doc.css("li").css("h3").css("a").each.with_index(1) do |pattern_name, index|
+  def self.scrape_category_patterns(user_input1)
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input1}/"))
+    pattern_name = @doc.css("li").css("h3").css("a").each.with_index(1) do |pattern_name, index|
       pattern = KnittingPatterns::Pattern.new
       pattern.title = pattern_name.text
       puts "#{index}. #{pattern.title}"
     end
   end
 
-  def self.scrape_pattern_url
+  def self.scrape_pattern_url(user_input2) #this still needs a lot of work
+    KnittingPatterns::Pattern.url = #doc.css("li").css("h3").css("a").attribute["href"].value
     #pattern.url = @pattern_info.attributes["href"].value
-    #Nokogiri::HTML(open("#{pattern.url}"))
+
   end
 end
 

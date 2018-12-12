@@ -14,8 +14,8 @@ class KnittingPatterns::CLI
   end
 
   def list_category_patterns
-    puts "Here are the patterns in the #{@input} category:"
-    patterns = KnittingPatterns::Pattern.category_patterns(@input)
+    puts "Here are the patterns in the #{@input1} category:"
+    patterns = KnittingPatterns::Pattern.category_patterns(@input1)
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
@@ -25,7 +25,7 @@ class KnittingPatterns::CLI
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
     input = gets.strip.downcase
     if input.to_i > 0
-      KnittingPatterns::Scraper.scrape_pattern_url
+      KnittingPatterns::Scraper.scrape_pattern_url(input)
     else
       puts "Hmm, I don't see that pattern. Here is the list of categories again:"
       list_categories
@@ -40,7 +40,7 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        @input = @categories[input.to_i-1]
+        @input1 = @categories[input.to_i-1]
         list_category_patterns
         choosing_a_pattern
       elsif input == "list"
