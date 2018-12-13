@@ -9,27 +9,14 @@ class KnittingPatterns::CLI
 
   def list_categories
     puts "Here are the categories of the free knitting patterns from Purl Soho:"
-    @categories = KnittingPatterns::Pattern.knit_categories
+    @categories = KnittingPatterns::Scraper.scrape_knit_categories
     @categories.each.with_index(1) {|category, index| puts "#{index}. #{category}"}
   end
 
   def list_category_patterns
-    puts "Here are the patterns in the #{@input1} category:"
-    patterns = KnittingPatterns::Pattern.category_patterns(@input1)
+    puts "Here are the patterns in the #{@input} category:"
+    patterns = KnittingPatterns::Pattern.category_patterns(@input)
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
-  end
-
-
-
-  def choosing_a_pattern #this might be an ugly method
-    puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
-    input = gets.strip.downcase
-    if input.to_i > 0
-      KnittingPatterns::Scraper.scrape_pattern_url(input)
-    else
-      puts "Hmm, I don't see that pattern. Here is the list of categories again:"
-      list_categories
-    end
   end
 
   def menu
@@ -40,7 +27,7 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        @input1 = @categories[input.to_i-1]
+        @input = @categories[input.to_i-1]
         list_category_patterns
         choosing_a_pattern
       elsif input == "list"
@@ -50,6 +37,23 @@ class KnittingPatterns::CLI
         goodbye
       else
         print "Hmm, I'm not familiar with that pattern. "
+      end
+    end
+  end
+
+  def choosing_a_pattern #this might be an ugly method
+    puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
+    input = nil
+    while input != "exit"
+      input = gets.strip.downcase
+
+      if input.to_i > 0
+        KnittingPatterns::Scraper.scrape_pattern_url(input)
+      elsif input == "exit"
+        goodbye
+      else
+        puts "Hmm, I don't see that pattern. Here is the list of categories again:"
+        list_categories
       end
     end
   end
