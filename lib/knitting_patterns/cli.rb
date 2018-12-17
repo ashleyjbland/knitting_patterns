@@ -9,13 +9,15 @@ class KnittingPatterns::CLI
 
   def list_categories
     puts "Here are the categories of the free knitting patterns from Purl Soho:"
-    @categories = KnittingPatterns::Scraper.scrape_knit_categories
+    @categories = KnittingPatterns::Scraper.new.scrape_knit_categories
     @categories.each.with_index(1) {|category, index| puts "#{index}. #{category}"}
   end
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    patterns = KnittingPatterns::Pattern.category_patterns(@input)
+    KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
+
+    end
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
