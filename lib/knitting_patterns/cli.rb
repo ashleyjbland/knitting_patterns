@@ -15,8 +15,8 @@ class KnittingPatterns::CLI
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
-
+    KnittingPatterns::Pattern.all.each.with_index do |title, index|
+      puts "#{index}. #{title}"
     end
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end

@@ -2,14 +2,15 @@ class KnittingPatterns::Pattern #class that makes the model
   attr_accessor :title, :url, :category
   @@all = []
 
-  def initialize
-    @title = title
-    @url = url
-    @@all << self
-  end
-
   def self.all
     @@all
+  end
+
+  def category_patterns
+  end
+
+  def open_in_browser
+    system("open '#{url}'")
   end
 
   def save
