@@ -6,17 +6,28 @@ class KnittingPatterns::Scraper #back end or controller class
     category
   end
 
-  def scrape_category_patterns(user_input)
-    @doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
-    @doc.css("li").css("h3").css("a").each do |pattern_info|
+  def self.scrape_category_patterns(user_input)
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
+    doc.css("li").css("h3").css("a")
       pattern = KnittingPatterns::Pattern.new
 
-      pattern.title = pattern_info.text
-      pattern.url = pattern_info.attribute("href").value
+      pattern.title = doc.css("li").css("h3").css("a").text
+      pattern.url = doc.css("li").css("h3").css("a").attribute("href").value
 
       pattern.save
+
+  end
+
+  def self.test #this is returning the data i want scrape_category_patterns to return
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-garments/"))
+    doc.css("li").css("h3").css("a").each.with_index(1) do |title, index|
+      puts "#{index}. #{title.text}"
+      puts "#{title.attribute("href")}"
     end
   end
+
+
+
 
   #def self.scrape_pattern_url(something) #this still needs a lot of work
   #  KnittingPatterns::Pattern.url = #doc.css("li").css("h3").css("a").attribute["href"].value

@@ -15,7 +15,8 @@ class KnittingPatterns::CLI
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    KnittingPatterns::Pattern.all.each.with_index do |title, index|
+    patterns = KnittingPatterns::Scraper.scrape_category_patterns(@input)
+    patterns.each.with_index do |title, index|
       puts "#{index}. #{title}"
     end
     #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
@@ -50,7 +51,7 @@ class KnittingPatterns::CLI
       input = gets.strip.downcase
 
       if input.to_i > 0
-        KnittingPatterns::Scraper.scrape_pattern_url(input)
+        #KnittingPatterns::Scraper.scrape_pattern_url(input)
       elsif input == "exit"
         goodbye
       else
