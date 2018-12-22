@@ -15,11 +15,10 @@ class KnittingPatterns::CLI
 
   def list_category_patterns
     puts "Here are the patterns in the #{@input} category:"
-    patterns = KnittingPatterns::Scraper.scrape_category_patterns(@input)
-    patterns.each.with_index do |title, index|
-      puts "#{index}. #{title}"
+    KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
+    KnittingPatterns::Pattern.all.each_with_index do |pattern, index|
+      puts "#{index+1}. #{pattern.title}"
     end
-    #patterns.each.with_index(1) {|pattern, index| puts "#{index}. #{pattern}"}
   end
 
   def menu

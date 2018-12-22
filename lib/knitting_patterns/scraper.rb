@@ -6,16 +6,16 @@ class KnittingPatterns::Scraper #back end or controller class
     category
   end
 
-  def self.scrape_category_patterns(user_input)
+  def scrape_category_patterns(user_input)
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
-    doc.css("li").css("h3").css("a")
+    doc.css("li").css("h3").css("a").each do |pattern_info|
       pattern = KnittingPatterns::Pattern.new
 
-      pattern.title = doc.css("li").css("h3").css("a").text
-      pattern.url = doc.css("li").css("h3").css("a").attribute("href").value
+      pattern.title = pattern_info.text
+      pattern.url = pattern_info.attribute("href").value
 
       pattern.save
-
+    end
   end
 
   def self.test #this is returning the data i want scrape_category_patterns to return
