@@ -11,10 +11,6 @@ class KnittingPatterns::Pattern #class that makes the model
     @@all
   end
 
-  def category_patterns(user_input)
-    KnittingPatterns::Scraper.scrape_category_patterns(user_input)
-  end
-
   def open_in_browser
     system("open '#{url}'")
   end
