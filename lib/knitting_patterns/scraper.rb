@@ -18,26 +18,17 @@ class KnittingPatterns::Scraper #back end or controller class
     end
   end
 
-  def self.test #this is returning the data i want scrape_category_patterns to return
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-garments/"))
-    doc.css("li").css("h3").css("a").each.with_index(1) do |title, index|
-      puts "#{index}. #{title.text}"
-      puts "#{title.attribute("href")}"
+  def scrape_selected_pattern(pattern_url)
+    doc = Nokogiri::HTML(open("#{pattern_url}"))
+    doc.css("div.pf-content").css("p").each do |info|
+      puts "#{info.text}"
     end
   end
 
-
-
-
-  #def self.scrape_pattern_url(something) #this still needs a lot of work
-  #  KnittingPatterns::Pattern.url = #doc.css("li").css("h3").css("a").attribute["href"].value
-    #pattern.url = @pattern_info.attributes["href"].value
-
-  #end
+  def self.test
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/2018/10/12/muhuroosa-blanket/"))
+    doc.css("div.pf-content").css("p").each do |info|
+      puts "#{info.text}"
+    end
+  end
 end
-
-
-#pattern.url = #url = pattern_name.attributes["href"].value Nokogiri::HTML(open("#{pattern.url}"))
-
-#@urls = doc.css("li").css("h3").css("a").attr("href") #definitely in the wrong spot, wrong method, wrong class
-#@urls.each {|url| puts "#{url}"}

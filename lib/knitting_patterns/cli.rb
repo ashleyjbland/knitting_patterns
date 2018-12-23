@@ -45,27 +45,28 @@ class KnittingPatterns::CLI
 
   def choosing_a_pattern #this needs work
     puts "If you would like more information on a specific pattern please enter the number of the pattern and you will be redirected to the web page."
-    puts "Or if none of these patterns are jumping out at you type 'list' to see the categories again."
+    puts "Or if none of these patterns are jumping out at you, type 'list' to see the categories again."
     input = nil
     while input != "exit"
       input = gets.strip.downcase
 
       if input.to_i > 0
+        #KnittingPatterns::Scraper.test
         pattern = KnittingPatterns::Pattern.all[input.to_i-1]
-        puts "#{pattern.url}"
+        KnittingPatterns::Scraper.new.scrape_selected_pattern_info("#{pattern.url}")
       elsif input == "list"
-        list_categories
+        call
       elsif input == "exit"
         goodbye
       else
         puts "Hmm, I don't see that pattern. Here is the list of categories again:"
-        list_categories
+        call
       end
     end
   end
 
   def goodbye
     puts "Thanks for stopping by! Come back anytime to review more knitting patterns!"
+    exit
   end
-
 end
