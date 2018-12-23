@@ -21,7 +21,7 @@ class KnittingPatterns::Scraper #back end or controller class
   def scrape_selected_pattern(pattern_url)
     doc = Nokogiri::HTML(open("#{pattern_url}"))
     doc.css("div.pf-content").css("p").each do |info|
-      puts "#{info.text}"
+      puts "#{info.text.strip}"
     end
   end
 
