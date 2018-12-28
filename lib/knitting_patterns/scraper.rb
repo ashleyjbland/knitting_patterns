@@ -24,11 +24,4 @@ class KnittingPatterns::Scraper #back end or controller class
       puts "#{info.text.strip}"
     end
   end
-
-  def self.test
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/2018/10/12/muhuroosa-blanket/"))
-    doc.css("div.pf-content").css("p").each do |info|
-      puts "#{info.text}"
-    end
-  end
 end

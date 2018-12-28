@@ -2,15 +2,15 @@
 class KnittingPatterns::CLI
 
   def call
-    puts "___________________________________________________________________________________________"
-    puts "Hello fellow knitter!"
+    puts "Hey fellow knitter!"
+    puts "Here are the categories of the free knitting patterns from Purl Soho:"
     puts "___________________________________________________________________________________________"
     list_categories
     menu
   end
 
   def list_categories
-    puts "Here are the categories of the free knitting patterns from Purl Soho:"
+    puts ""
     @categories = KnittingPatterns::Scraper.new.scrape_knit_categories
     @categories.each.with_index(1) {|category, index| puts "#{index}. #{category}"}
     puts "___________________________________________________________________________________________"
@@ -31,11 +31,15 @@ class KnittingPatterns::CLI
     while input != "exit"
       puts ""
       puts "To see all the patterns in a category, enter the corresponding number."
-      puts "Type 'list' to see them all again or 'exit' to leave."
+      puts "Type 'list' to see them all again or 'exit' at anytime to leave."
       puts "___________________________________________________________________________________________"
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i == 7
+        @input = "toys-hobbies"
+        list_category_patterns
+        choosing_a_pattern
+      elsif input.to_i > 0 && input.to_i < @categories.size
         @input = @categories[input.to_i-1]
         list_category_patterns
         choosing_a_pattern
@@ -45,7 +49,7 @@ class KnittingPatterns::CLI
       elsif input == "exit"
         goodbye
       else
-        print "Hmm, I'm not familiar with that pattern. "
+        print "Hmm, I'm not seeing that category. "
       end
     end
   end
@@ -54,11 +58,12 @@ class KnittingPatterns::CLI
     puts ""
     puts "For more information on a specific pattern, please enter the corresponding number."
     puts "Or if none of these patterns are jumping out at you, type 'list' to see the categories again."
+    puts "___________________________________________________________________________________________"
     input = nil
     while input != "exit"
       input = gets.strip.downcase
 
-      if input.to_i > 0
+      if input.to_i > 0 && input.to_i <= KnittingPatterns::Pattern.all.size
         pattern = KnittingPatterns::Pattern.all[input.to_i-1]
         puts "___________________________________________________________________________________________"
         puts "#{pattern.title}"
@@ -67,13 +72,15 @@ class KnittingPatterns::CLI
         puts "___________________________________________________________________________________________"
         puts "To visit the website directly click here ----> #{pattern.url}"
         puts ""
-        goodbye
+        puts "If you would like to see another pattern in this category, simply enter the corresponding number."
+        puts "If you would like to see the list of categories instead, type 'list'"
+        puts "___________________________________________________________________________________________"
       elsif input == "list"
         call
       elsif input == "exit"
         goodbye
       else
-        puts "Hmm, I don't see that pattern. Here is the list of categories again:"
+        puts "Hmm, I don't see that pattern. Let's try this again."
         call
       end
     end
