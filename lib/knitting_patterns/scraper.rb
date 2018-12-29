@@ -1,4 +1,4 @@
-class KnittingPatterns::Scraper #back end or controller class
+class KnittingPatterns::Scraper 
 
   def scrape_knit_categories
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-view-all/"))

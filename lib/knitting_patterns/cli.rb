@@ -1,4 +1,3 @@
-#CLI controller, responsible for user interaction
 class KnittingPatterns::CLI
 
   def call
@@ -39,7 +38,7 @@ class KnittingPatterns::CLI
         @input = "toys-hobbies"
         list_category_patterns
         choosing_a_pattern
-      elsif input.to_i > 0 && input.to_i < @categories.size
+      elsif input.to_i > 0 && input.to_i <= @categories.size
         @input = @categories[input.to_i-1]
         list_category_patterns
         choosing_a_pattern

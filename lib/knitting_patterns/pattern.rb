@@ -1,4 +1,4 @@
-class KnittingPatterns::Pattern #class that makes the model
+class KnittingPatterns::Pattern 
   attr_accessor :title, :url, :category
   @@all = []
 

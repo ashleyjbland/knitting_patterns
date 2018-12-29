@@ -1,4 +1,3 @@
-#this is my environment
 require 'nokogiri'
 require 'open-uri'
 require 'pry'
