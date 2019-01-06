@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
-require "bundler/setup"
-require './lib/knitting_patterns'
+#require "bundler/setup"
+require_relative '../lib/knitting_patterns'
+
 KnittingPatterns::CLI.new.call

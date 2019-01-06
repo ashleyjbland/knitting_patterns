@@ -1,7 +1,7 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "knitting_patterns/version"
+require_relative "./lib/knitting_patterns/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "knitting_patterns"
@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["'Ashley Bland'"]
   spec.email         = ["'ashleyjbland@gmail.com'"]
 
-  spec.summary       = "Hot Right Now Knitting Patterns"
-  spec.description   = "Provides information on Ravelry's popular knitting patterns"
+  spec.summary       = "Free Knitting Patterns from Purl Soho"
+  spec.description   = "Provides information on the free knitting patterns from Purl Soho"
   #spec.homepage      = "TODO: Put your gem's website or public repo URL here."
   spec.license       = "MIT"
   spec.executables << 'knitting_patterns'
