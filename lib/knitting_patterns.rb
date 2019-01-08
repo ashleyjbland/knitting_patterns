@@ -4,8 +4,8 @@ require 'pry'
 
 
 module KnittingPatterns
-  require_relative '../lib/version'
-  require_relative '../lib/scraper'
-  require_relative '../lib/pattern'
-  require_relative '../lib/cli'
+  require_relative '../lib/knitting_patterns/version'
+  require_relative '../lib/knitting_patterns/scraper'
+  require_relative '../lib/knitting_patterns/pattern'
+  require_relative '../lib/knitting_patterns/cli'
 end
