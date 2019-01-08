@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "Free Knitting Patterns from Purl Soho"
   spec.description   = "Provides information on the free knitting patterns from Purl Soho"
-  #spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/ashleyjbland/knitting_patterns"
   spec.license       = "MIT"
   spec.executables << 'knitting_patterns'
 
