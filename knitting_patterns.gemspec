@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = KnittingPatterns::VERSION
   spec.authors       = ["Ashley Bland"]
   spec.email         = ["ashleyjbland@gmail.com"]
-  
+  spec.files         = ["lib/knitting_patterns.rb", "lib/knitting_patterns/cli.rb", "lib/knitting_patterns/scraper.rb", "lib/knitting_patterns/pattern.rb"]
   spec.summary       = "Free Knitting Patterns from Purl Soho"
   spec.description   = "Provides information on the free knitting patterns from Purl Soho"
   spec.homepage      = "https://github.com/ashleyjbland/knitting_patterns"
