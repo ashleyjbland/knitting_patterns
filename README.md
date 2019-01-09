@@ -6,11 +6,14 @@ This Ruby Gem provides a CLI to view the free knitting patterns from Purl Soho's
 
 ## Installation
 
-    $ gem install knitting_patterns
+   $ gem install knitting_patterns
 
 ## Usage
 
-    $ knitting-patterns
+Run bin/setup to install dependencies.
+Then, type the below and follow the on screen prompts.
+
+    $ knitting_patterns
 
 ## Development
 
