@@ -18,7 +18,9 @@ class KnittingPatterns::CLI
   def list_category_patterns
     puts "___________________________________________________________________________________________"
     puts ""
-    KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
+    if KnittingPatterns::Pattern.all == []
+      KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
+    end
     KnittingPatterns::Pattern.all.each_with_index do |pattern, index|
       puts "#{index+1}. #{pattern.title}"
     end
