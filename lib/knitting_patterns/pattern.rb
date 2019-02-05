@@ -1,5 +1,5 @@
-class KnittingPatterns::Pattern 
-  attr_accessor :title, :url, :category
+class KnittingPatterns::Pattern
+  attr_accessor :title, :url, :category, :details
   @@all = []
 
   def self.all
