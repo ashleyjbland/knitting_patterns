@@ -10,7 +10,9 @@ class KnittingPatterns::CLI
 
   def list_categories
     puts ""
-    KnittingPatterns::Scraper.new.scrape_knit_categories
+    if KnittingPatterns::Category.all == []
+      KnittingPatterns::Scraper.new.scrape_knit_categories
+    end
     KnittingPatterns::Category.all.each.with_index(1) {|category, index| puts "#{index}. #{category.title}"}
     puts "___________________________________________________________________________________________"
   end
@@ -41,7 +43,7 @@ class KnittingPatterns::CLI
         list_category_patterns
         choosing_a_pattern
       elsif input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
-        @input = KnittingPatterns::Category.all[input.to_i-1].title
+        @input = KnittingPatterns::Category.all[input.to_i-1].title.downcase
         list_category_patterns
         choosing_a_pattern
       elsif input == "list"

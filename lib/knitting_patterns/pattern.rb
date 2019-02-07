@@ -9,4 +9,8 @@ class KnittingPatterns::Pattern
   def save
     @@all << self
   end
+
+  def category
+    KnittingPatterns::Category.title
+  end
 end

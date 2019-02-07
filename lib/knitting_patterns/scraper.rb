@@ -13,6 +13,8 @@ class KnittingPatterns::Scraper
 
   def scrape_category_patterns(user_input)
     doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
+    #doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-blankets/"))
+
     doc.css("li").css("h3").css("a").each do |pattern_info|
       pattern = KnittingPatterns::Pattern.new
 
@@ -25,6 +27,7 @@ class KnittingPatterns::Scraper
 
   def scrape_selected_pattern(pattern)
     doc = Nokogiri::HTML(open("#{pattern.url}"))
+
     doc.css("div.pf-content").css("p").each do |info|
       pattern.details = info.text.strip
 

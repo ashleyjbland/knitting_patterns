@@ -9,4 +9,8 @@ class KnittingPatterns::Category
   def save
     @@all << self
   end
+
+  def patterns
+    KnittingPatterns::Pattern.all.select {|pattern| KnittingPatterns.Pattern.category == self}
+  end
 end
