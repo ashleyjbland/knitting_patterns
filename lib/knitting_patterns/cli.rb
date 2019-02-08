@@ -66,7 +66,7 @@ class KnittingPatterns::CLI
     while input != "exit"
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= KnittingPatterns::Pattern.all.size
+      if input.to_i > 0 && input.to_i <= KnittingPatterns::Category.pattern_count.size
         pattern = KnittingPatterns::Pattern.all[input.to_i-1]
         puts "___________________________________________________________________________________________"
         puts "#{pattern.title}"
