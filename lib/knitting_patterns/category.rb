@@ -11,10 +11,11 @@ class KnittingPatterns::Category
   end
 
   def patterns
-    KnittingPatterns::Pattern.all.select {|pattern| KnittingPatterns.Pattern.category == self}
+    KnittingPatterns::Pattern.all.select {|pattern| pattern.category == self.title}
   end
 
   def self.pattern_count
-    KnittingPatterns::Pattern.all.count
+    patterns = KnittingPatterns::Pattern.all.each {|pattern| pattern.category == self}
+    patterns.count
   end
 end

@@ -12,13 +12,14 @@ class KnittingPatterns::Scraper
   end
 
   def scrape_category_patterns(user_input)
-    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input}/"))
+    doc = Nokogiri::HTML(open("https://www.purlsoho.com/create/category/knit/knit-#{user_input.title.strip.downcase}/"))
 
     doc.css("li").css("h3").css("a").each do |pattern_info|
       pattern = KnittingPatterns::Pattern.new
 
       pattern.title = pattern_info.text
       pattern.url = pattern_info.attribute("href").value
+      pattern.category = user_input
 
       pattern.save
     end

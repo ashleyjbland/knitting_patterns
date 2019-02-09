@@ -10,7 +10,7 @@ class KnittingPatterns::Pattern
     @@all << self
   end
 
-  def category
-    KnittingPatterns::Category.title
+  def pattern_category
+    pattern.category if category
   end
 end

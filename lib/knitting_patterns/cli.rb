@@ -43,7 +43,7 @@ class KnittingPatterns::CLI
         list_category_patterns
         choosing_a_pattern
       elsif input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
-        @input = KnittingPatterns::Category.all[input.to_i-1].title.strip.downcase
+        @input = KnittingPatterns::Category.all[input.to_i-1]
         list_category_patterns
         choosing_a_pattern
       elsif input == "list"
@@ -66,7 +66,7 @@ class KnittingPatterns::CLI
     while input != "exit"
       input = gets.strip.downcase
 
-      if input.to_i > 0 && input.to_i <= KnittingPatterns::Category.pattern_count.size
+      if input.to_i > 0 && input.to_i <= KnittingPatterns::Category.pattern_count
         pattern = KnittingPatterns::Pattern.all[input.to_i-1]
         spacer
         puts "#{pattern.title}"
