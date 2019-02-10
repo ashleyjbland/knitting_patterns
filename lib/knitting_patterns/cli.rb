@@ -17,16 +17,21 @@ class KnittingPatterns::CLI
     spacer
   end
 
-  def list_category_patterns
+  def list_category_patterns #i don't need this methoda and list by
     spacer
     puts ""
-    if KnittingPatterns::Pattern.all == []
+    list_patterns_by_category
+    spacer
+  end
+
+  def list_patterns_by_category
+
       KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
-    end
-    KnittingPatterns::Pattern.all.uniq.each_with_index do |pattern, index| #this is not returning the correct patterns
+
+    KnittingPatterns::Pattern.all.uniq.each_with_index do |pattern, index|
+      pattern.category == @input
       puts "#{index+1}. #{pattern.title}"
     end
-    spacer
   end
 
   def menu
@@ -43,7 +48,7 @@ class KnittingPatterns::CLI
         list_category_patterns
         choosing_a_pattern
       elsif input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
-        @input = KnittingPatterns::Category.all[input.to_i-1]
+        @input = KnittingPatterns::Category.all[input.to_i-1].title.strip.downcase
         list_category_patterns
         choosing_a_pattern
       elsif input == "list"
