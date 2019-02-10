@@ -25,13 +25,17 @@ class KnittingPatterns::CLI
   end
 
   def list_patterns_by_category
-
+    spacer
+    puts ""
+    if KnittingPatterns::Pattern.all.include?(@input) != true #this whole block isn't working properly
       KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
-
-    KnittingPatterns::Pattern.all.uniq.each_with_index do |pattern, index|
-      pattern.category == @input
-      puts "#{index+1}. #{pattern.title}"
     end
+    KnittingPatterns::Pattern.all.uniq.collect.with_index do |pattern, index|
+      if pattern.category == @input
+       puts "#{index+1}. #{pattern.title}"
+      end
+    end
+    spacer
   end
 
   def menu

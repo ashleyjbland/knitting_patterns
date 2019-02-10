@@ -10,9 +10,9 @@ class KnittingPatterns::Category
     @@all << self
   end
 
-  def self.patterns
-    patterns = KnittingPatterns::Pattern.all.select {|pattern| pattern.category == self}
-  end
+  #def self.patterns
+  #  KnittingPatterns::Pattern.all.select {|pattern| pattern.category == self.title}
+  #end
 
   def self.pattern_count
     patterns = KnittingPatterns::Pattern.all.each {|pattern| pattern.category == self}

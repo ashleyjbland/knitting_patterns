@@ -8,7 +8,6 @@ class KnittingPatterns::Pattern
 
   def save
     @@all << self
-    binding.pry
   end
 
   def pattern_category
