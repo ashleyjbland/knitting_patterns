@@ -73,7 +73,10 @@ class KnittingPatterns::CLI
         spacer
         puts "#{pattern.title}"
         spacer
-        KnittingPatterns::Scraper.new.scrape_selected_pattern(pattern)
+        if pattern.details == nil
+          KnittingPatterns::Scraper.new.scrape_selected_pattern(pattern)
+        end
+        puts pattern.details
         spacer
         puts "To visit the website directly click here ----> #{pattern.url}"
         puts ""
