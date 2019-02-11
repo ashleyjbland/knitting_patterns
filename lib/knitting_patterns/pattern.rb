@@ -11,6 +11,6 @@ class KnittingPatterns::Pattern
   end
 
   def pattern_category
-    pattern.category if category
+    self.category if category
   end
 end

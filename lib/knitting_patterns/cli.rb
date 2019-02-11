@@ -17,17 +17,10 @@ class KnittingPatterns::CLI
     spacer
   end
 
-  def list_category_patterns #i don't need this methoda and list by
-    spacer
-    puts ""
-    list_patterns_by_category
-    spacer
-  end
-
   def list_patterns_by_category
     spacer
     puts ""
-    if KnittingPatterns::Pattern.all.include?(@input) != true #this whole block isn't working properly
+    if KnittingPatterns::Category.new.patterns == []
       KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
     end
     KnittingPatterns::Pattern.all.uniq.collect.with_index do |pattern, index|
@@ -49,11 +42,11 @@ class KnittingPatterns::CLI
 
       if input.to_i == 7
         @input = "toys-hobbies"
-        list_category_patterns
+        list_patterns_by_category
         choosing_a_pattern
       elsif input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
         @input = KnittingPatterns::Category.all[input.to_i-1].title.strip.downcase
-        list_category_patterns
+        list_patterns_by_category
         choosing_a_pattern
       elsif input == "list"
         puts "Interested in some more ideas, huh?"

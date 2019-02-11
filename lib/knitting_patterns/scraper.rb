@@ -20,7 +20,6 @@ class KnittingPatterns::Scraper
       pattern.title = pattern_info.text
       pattern.url = pattern_info.attribute("href").value
       pattern.category = user_input
-      pattern.details = ""
 
       pattern.save
     end
@@ -29,7 +28,9 @@ class KnittingPatterns::Scraper
   def scrape_selected_pattern(pattern)
     doc = Nokogiri::HTML(open("#{pattern.url}"))
     pattern.details = doc.css("div.pf-content").css("p").text.strip
+    
     pattern.save
+
     puts pattern.details
   end
 end
