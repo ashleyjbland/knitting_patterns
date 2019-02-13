@@ -20,7 +20,7 @@ class KnittingPatterns::CLI
   def list_patterns_by_category
     spacer
     puts ""
-    if KnittingPatterns::Category.new.patterns == []
+    if @input.patterns == []
       KnittingPatterns::Scraper.new.scrape_category_patterns(@input)
     end
     KnittingPatterns::Pattern.all.uniq.collect.with_index do |pattern, index|
@@ -40,12 +40,8 @@ class KnittingPatterns::CLI
       spacer
       input = gets.strip.downcase
 
-      if input.to_i == 7
-        @input = "toys-hobbies"
-        list_patterns_by_category
-        choosing_a_pattern
-      elsif input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
-        @input = KnittingPatterns::Category.all[input.to_i-1].title.strip.downcase
+      if input.to_i > 0 && input.to_i <= KnittingPatterns::Category.all.size
+        @input = KnittingPatterns::Category.all[input.to_i-1]
         list_patterns_by_category
         choosing_a_pattern
       elsif input == "list"
